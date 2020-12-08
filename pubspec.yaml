@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   camera:
+  flutter_blue: ^0.7.3
   camera_camera:
   vonage: ^0.0.3
   video_player: ">=0.10.9+2 <2.0.0"

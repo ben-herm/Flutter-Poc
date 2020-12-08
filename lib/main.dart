@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:vonage/verify.dart';
 import 'dart:convert';
 import 'package:vonage/vonage.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 Future<void> vonage() async {
   var auth = VerifyVonage(
@@ -21,8 +22,9 @@ void main() async {
   // }).catchError((err) {
   //   print(err); // In case pf error
   // });
+
   await vonage();
-  print('hello');
+
   runApp(MyApp());
 }
 
