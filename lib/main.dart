@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:async';
+import 'package:camera_camera/camera_camera.dart';
+
 import 'widgets.dart';
 import 'dart:developer' as developer;
 import 'package:camera_camera/page/camera.dart';
@@ -27,38 +29,23 @@ void main() async {
   // });
 
   // await vonage();
-
+  print('hello');
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Revilion Poc';
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.green,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(appTitle),
+        body: PageView(
+          children: [MyHomePage(), FlutterBlueApp()],
         ),
-        body: MyHomePage(),
       ),
     );
   }
@@ -194,7 +181,7 @@ class FindDevicesScreen extends StatelessWidget {
             return FloatingActionButton(
                 child: Icon(Icons.search),
                 onPressed: () => FlutterBlue.instance
-                    .startScan(timeout: Duration(seconds: 4)));
+                    .startScan(timeout: Duration(seconds: 8)));
           }
         },
       ),
@@ -382,7 +369,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
+  File val;
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -392,10 +379,6 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
         key: _formKey,
         child: Column(children: <Widget>[
-          // Container(
-          //   margin: EdgeInsets.symmetric(vertical: 20.0),
-          //   child: ,
-          // )
           TextFormField(
             decoration: new InputDecoration(labelText: "Enter your number"),
             keyboardType: TextInputType.number,
@@ -442,17 +425,16 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final appTitle = 'Revilion Poc';
   File val;
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Colors.white,
+
+      appBar: AppBar(
+        title: Text(appTitle),
+      ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.camera_alt),
           onPressed: () async {
@@ -468,34 +450,30 @@ class _MyHomePageState extends State<MyHomePage> {
                         print('$direction');
                         print('--------------');
                       },
-                      // imageMask: CameraFocus.square(
-                      //   color: Colors.black.withOpacity(0.5),
-                      // ),
+                      // imageMask: widget,
                     ));
             setState(() {});
           }),
-      body: PageView(
-        children: [
-          Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[MyCustomForm()],
-          ),
-          FlutterBlueApp(),
-        ],
+      body: Container(
+        margin: new EdgeInsets.symmetric(horizontal: 40.0),
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[MyCustomForm()],
+        ),
 
         // margin: const EdgeInsets.all(40.0),
         // Center is a layout widget. It takrs a single child and positions it
