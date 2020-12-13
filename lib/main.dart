@@ -2,7 +2,9 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:async';
 import 'package:camera_camera/camera_camera.dart';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'widgets.dart';
 import 'dart:developer' as developer;
 import 'package:camera_camera/page/camera.dart';
@@ -34,6 +36,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final String viewType = 'androidFrameLayout';
+  final Map<String, dynamic> creationParams = <String, dynamic>{};
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,6 +70,39 @@ class FlutterBlueApp extends StatelessWidget {
             }
             return BluetoothOffScreen(state: state);
           }),
+    );
+  }
+}
+
+class AndroidPlatform extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // This is used in the platform side to register the view.
+    final String viewType = 'androidFrameLayout';
+    // Pass parameters to the platform side.
+    final Map<String, dynamic> creationParams = <String, dynamic>{};
+
+    return PlatformViewLink(
+      viewType: viewType,
+      surfaceFactory:
+          (BuildContext context, PlatformViewController controller) {
+        return AndroidViewSurface(
+          controller: controller,
+          gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+        );
+      },
+      onCreatePlatformView: (PlatformViewCreationParams params) {
+        return PlatformViewsService.initSurfaceAndroidView(
+          id: params.id,
+          viewType: viewType,
+          layoutDirection: TextDirection.ltr,
+          creationParams: creationParams,
+          creationParamsCodec: StandardMessageCodec(),
+        )
+          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+          ..create();
+      },
     );
   }
 }

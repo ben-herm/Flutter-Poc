@@ -22,15 +22,10 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 29
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
 
     lintOptions {
         disable 'InvalidPackage'
@@ -52,6 +47,11 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
 }
 
 flutter {
@@ -59,6 +59,8 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.0.0-beta01"
+    implementation 'com.opentok.android:opentok-android-sdk:2.18.1'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }
