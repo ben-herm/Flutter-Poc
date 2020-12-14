@@ -35,6 +35,7 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
     private static final int RC_VIDEO_APP_PERM = 124;
     private Session mSession;
     private Publisher mPublisher;
+    private Subscriber mSubscriber;
     private FrameLayout mFrameLayout;
 
     @Override
@@ -84,16 +85,7 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
     @Override
     public void onConnected(Session session) {
         Log.i(LOG_TAG, "Session Connected");
-        mPublisher = new Publisher.Builder(this).build();
-        mPublisher.setPublisherListener(this);
 
-        mFrameLayout.addView(mPublisher.getView());
-
-        if (mPublisher.getView() instanceof GLSurfaceView){
-            ((GLSurfaceView) mPublisher.getView()).setZOrderOnTop(true);
-        }
-
-        mSession.publish(mPublisher);
     }
 
     @Override
@@ -104,6 +96,13 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
     @Override
     public void onStreamReceived(Session session, Stream stream) {
         Log.i(LOG_TAG, "Stream Received");
+        Log.i(LOG_TAG, "Stream Received");
+
+        if (mSubscriber == null) {
+            mSubscriber = new Subscriber.Builder(this, stream).build();
+            mSession.subscribe(mSubscriber);
+            mFrameLayout.addView(mSubscriber.getView());
+        }
     }
 
     @Override
