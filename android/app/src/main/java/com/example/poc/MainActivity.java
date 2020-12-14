@@ -28,7 +28,7 @@ import android.opengl.GLSurfaceView;
 public class MainActivity extends FlutterActivity implements Session.SessionListener, PublisherKit.PublisherListener {
     private static final String CHANNEL = "vonage";
     private static String API_KEY = "47043564"; 
-    private static String SESSION_ID = "1_MX40NzA0MzU2NH5-MTYwNzkzMTY0OTQwNn5SZENGWWNvS25NT3RZTlZZdVNwb2RtQ3l-fg";
+    private static String SESSION_ID = "2_MX40NzA0MzU2NH5-MTYwNzk0OTIxMTAyMX5TVlpSb3lYQ21hTGllRkRtNFJIanFqeXl-fg";
     private static String TOKEN = "T1==cGFydG5lcl9pZD00NzA0MzU2NCZzaWc9NzU3NDJhM2Q1ZTk4YmM2ZTE3MGQ3ZWJmMDY1Njg2MDk2ZjRjMWVhMTpzZXNzaW9uX2lkPTFfTVg0ME56QTBNelUyTkg1LU1UWXdOemt6TVRZME9UUXdObjVTWkVOR1dXTnZTMjVOVDNSWlRsWlpkVk53YjJSdFEzbC1mZyZjcmVhdGVfdGltZT0xNjA3OTMxNjg5Jm5vbmNlPTAuMDY0MTAyNTgxMDgzOTMyODUmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYxMDUyMzY5NSZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ==";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RC_SETTINGS_SCREEN_PERM = 123;

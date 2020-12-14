@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'widgets.dart';
-import 'package:flutter/widget.dart';
+// import 'package:flutter/widget.dart';
 import 'package:camera_camera/page/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,7 +77,7 @@ class IosPlatform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // This is used in the platform side to register the view.
-    final String viewType = '<platform-view-typeÎ>';
+    final String viewType = 'iosView';
     // Pass parameters to the platform side.
     final Map<String, dynamic> creationParams = <String, dynamic>{};
 
@@ -431,7 +431,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               }
             },
             child: Text('Submit'),
-          )
+          ),
           // Add TextFormFields and ElevatedButton here.
         ]));
   }
@@ -491,8 +491,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[MyCustomForm()],
+          // mainAxisAlignment: MainAxisAlignment.center
+          children: <Widget>[
+            MyCustomForm(),
+            Expanded(
+              child: IosPlatform(),
+            )
+          ],
         ),
 
         // margin: const EdgeInsets.all(40.0),
