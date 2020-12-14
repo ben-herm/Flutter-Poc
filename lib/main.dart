@@ -36,7 +36,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final String viewType = 'androidFrameLayout';
   final Map<String, dynamic> creationParams = <String, dynamic>{};
   @override
   Widget build(BuildContext context) {

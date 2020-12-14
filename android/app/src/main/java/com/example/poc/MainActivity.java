@@ -13,6 +13,8 @@ import android.util.Log;
 import com.opentok.android.Session;
 import com.opentok.android.Stream;
 import com.opentok.android.Publisher;
+
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.opentok.android.PublisherKit;
 import com.opentok.android.Subscriber;
@@ -23,16 +25,17 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import android.opengl.GLSurfaceView;
 
-public class MainActivity extends FlutterActivity implements Session.SessionListener  {
+public class MainActivity extends FlutterActivity implements Session.SessionListener, PublisherKit.PublisherListener {
     private static final String CHANNEL = "vonage";
-    private static String API_KEY = "";
-    private static String SESSION_ID = "";
-    private static String TOKEN = "";
+    private static String API_KEY = "47043564"; 
+    private static String SESSION_ID = "1_MX40NzA0MzU2NH5-MTYwNzkzMTY0OTQwNn5SZENGWWNvS25NT3RZTlZZdVNwb2RtQ3l-fg";
+    private static String TOKEN = "T1==cGFydG5lcl9pZD00NzA0MzU2NCZzaWc9NzU3NDJhM2Q1ZTk4YmM2ZTE3MGQ3ZWJmMDY1Njg2MDk2ZjRjMWVhMTpzZXNzaW9uX2lkPTFfTVg0ME56QTBNelUyTkg1LU1UWXdOemt6TVRZME9UUXdObjVTWkVOR1dXTnZTMjVOVDNSWlRsWlpkVk53YjJSdFEzbC1mZyZjcmVhdGVfdGltZT0xNjA3OTMxNjg5Jm5vbmNlPTAuMDY0MTAyNTgxMDgzOTMyODUmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYxMDUyMzY5NSZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ==";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RC_SETTINGS_SCREEN_PERM = 123;
     private static final int RC_VIDEO_APP_PERM = 124;
     private Session mSession;
     private Publisher mPublisher;
+    private FrameLayout mFrameLayout;
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -55,6 +58,9 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFrameLayout = new FrameLayout(this);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(300, 300);
+        this.addContentView(mFrameLayout,layoutParams);
         requestPermissions();
     }
 
@@ -78,6 +84,16 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
     @Override
     public void onConnected(Session session) {
         Log.i(LOG_TAG, "Session Connected");
+        mPublisher = new Publisher.Builder(this).build();
+        mPublisher.setPublisherListener(this);
+
+        mFrameLayout.addView(mPublisher.getView());
+
+        if (mPublisher.getView() instanceof GLSurfaceView){
+            ((GLSurfaceView) mPublisher.getView()).setZOrderOnTop(true);
+        }
+
+        mSession.publish(mPublisher);
     }
 
     @Override
@@ -100,4 +116,18 @@ public class MainActivity extends FlutterActivity implements Session.SessionList
         Log.e(LOG_TAG, "Session error: " + opentokError.getMessage());
     }
 
+    @Override
+    public void onStreamCreated(PublisherKit publisherKit, Stream stream) {
+
+    }
+
+    @Override
+    public void onStreamDestroyed(PublisherKit publisherKit, Stream stream) {
+
+    }
+
+    @Override
+    public void onError(PublisherKit publisherKit, OpentokError opentokError) {
+
+    }
 }
