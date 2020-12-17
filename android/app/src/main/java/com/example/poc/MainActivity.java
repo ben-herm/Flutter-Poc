@@ -28,8 +28,8 @@ import android.opengl.GLSurfaceView;
 public class MainActivity extends FlutterActivity implements Session.SessionListener, PublisherKit.PublisherListener {
     private static final String CHANNEL = "vonage";
     private static String API_KEY = "47043564"; 
-    private static String SESSION_ID = "2_MX40NzA0MzU2NH5-MTYwNzk0OTIxMTAyMX5TVlpSb3lYQ21hTGllRkRtNFJIanFqeXl-fg";
-    private static String TOKEN = "T1==cGFydG5lcl9pZD00NzA0MzU2NCZzaWc9NzU3NDJhM2Q1ZTk4YmM2ZTE3MGQ3ZWJmMDY1Njg2MDk2ZjRjMWVhMTpzZXNzaW9uX2lkPTFfTVg0ME56QTBNelUyTkg1LU1UWXdOemt6TVRZME9UUXdObjVTWkVOR1dXTnZTMjVOVDNSWlRsWlpkVk53YjJSdFEzbC1mZyZjcmVhdGVfdGltZT0xNjA3OTMxNjg5Jm5vbmNlPTAuMDY0MTAyNTgxMDgzOTMyODUmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTYxMDUyMzY5NSZpbml0aWFsX2xheW91dF9jbGFzc19saXN0PQ==";
+    private static String SESSION_ID = "2_MX40NzA0MzU2NH5-MTYwODE5MTcwMTYyOX5mWU9pdVlqbUNuQm5XbENreFVITWZjcjV-fg";
+    private static String TOKEN = "T1==cGFydG5lcl9pZD00NzA0MzU2NCZzaWc9MDY1OWIxZTZkYjUwODkzMjRmYjU2NjA2MGI2NDk2ZGM5MzI0MTczODpzZXNzaW9uX2lkPTJfTVg0ME56QTBNelUyTkg1LU1UWXdPREU1TVRjd01UWXlPWDVtV1U5cGRWbHFiVU51UW01WGJFTnJlRlZJVFdaamNqVi1mZyZjcmVhdGVfdGltZT0xNjA4MTkyNDk3Jm5vbmNlPTAuODkxMjUzODM5ODA5Njk5NiZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNjA4MTk2MDk4JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int RC_SETTINGS_SCREEN_PERM = 123;
     private static final int RC_VIDEO_APP_PERM = 124;
